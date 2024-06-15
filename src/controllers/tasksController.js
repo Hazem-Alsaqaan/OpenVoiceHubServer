@@ -34,9 +34,20 @@ const deleteTask = async(req, res, next)=>{
         next(new APIsError(`can't delete the task ${err}`, 500))
     }
 }
+const updateTask = async(req, res, next)=>{
+    const {id} = req.params
+    try{
+        const updateTask = await taskModel.findByIdAndUpdate(id)
+        res.status(200).json(updateTask)
+    }catch(err){
+        console.log(`controller error update task ${err}`)
+        next(new APIsError(`can't update the task ${err}`, 500))
+    }
+}
 
 export {
     getAllTasks,
     addNewTask,
-    deleteTask
+    deleteTask,
+    updateTask
 }
