@@ -36,8 +36,9 @@ const deleteTask = async(req, res, next)=>{
 }
 const updateTask = async(req, res, next)=>{
     const {id} = req.params
+    const { title, description, completed } = req.body
     try{
-        const updateTask = await taskModel.findByIdAndUpdate(id)
+        const updateTask = await taskModel.findByIdAndUpdate(id, { title, description, completed }, {new: true})
         res.status(200).json(updateTask)
     }catch(err){
         console.log(`controller error update task ${err}`)
