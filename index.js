@@ -31,6 +31,6 @@ app.use((err, req, res, next)=>{
 })
 
 connectionWithDataBaseHandler()
-app.listen(4001, ()=>{
+app.listen(process.env.PORT || 4001, ()=>{
     console.log("Server is running on port 4001...")
 })
