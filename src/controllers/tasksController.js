@@ -13,6 +13,17 @@ const getAllTasks = async(req, res, next)=>{
     }
 }
 
+const searchTasks = async(req, res, next)=>{
+    const {title} = req.body
+    try{
+        const searchTaskes = await taskModel.find({title: title})
+        res.status(200).json(searchTaskes)
+    }catch(err){
+        console.log(`controller error search task ${err}`)
+        next(new APIsError(`can't search tasks ${err}`, 500))
+    }
+}
+
 const addNewTask = async(req, res, next)=>{
     const { title, description, completed } = req.body
     try{
@@ -50,5 +61,6 @@ export {
     getAllTasks,
     addNewTask,
     deleteTask,
-    updateTask
+    updateTask,
+    searchTasks
 }
